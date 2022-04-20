@@ -2,6 +2,7 @@
 using System.Net.Sockets;
 using System.Threading;
 using System.Collections.Generic;
+using System.Threading.Tasks; 
 
 
 namespace ChatServer_Mutex
@@ -22,6 +23,7 @@ namespace ChatServer_Mutex
         {
             MyTcpClient Mc = new MyTcpClient();
             LinkedList<String> Client_list = new LinkedList<String>();
+            
 
             String IpInput = Console.ReadLine();
             if(IpInput == $"/c {server}")
@@ -34,6 +36,7 @@ namespace ChatServer_Mutex
                     Console.WriteLine(chat);
                 }
             }
+
 
             try
             {
@@ -58,9 +61,7 @@ namespace ChatServer_Mutex
                     }
 
 
-                    ConsoleKeyInfo WirteKey = Console.ReadKey(true);
-
-                    if (WirteKey.Key == ConsoleKey.T)
+                    if (Console.ReadKey().Key == ConsoleKey.T)
                     {
                         Console.WriteLine("메세지를 입력해주세요.");
 
@@ -105,6 +106,7 @@ namespace ChatServer_Mutex
 
 
         }
+
 
         static void Func()
         {

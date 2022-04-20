@@ -16,6 +16,7 @@ namespace Chapter02_Server
         bool ClientConnect = false;
         String Read_data = null;
         NetworkStream stream;
+        TcpClient client;
 
         static void ServerStart()
         {
@@ -40,7 +41,7 @@ namespace Chapter02_Server
                 ML.ClientConnect = true;
 
 
-                TcpClient client = ML.server.AcceptTcpClient();
+                ML.client = ML.server.AcceptTcpClient();
                 Server_list.AddLast("'주' 님께서 연결되었습니다.");
 
 
@@ -50,7 +51,7 @@ namespace Chapter02_Server
                 {
 
                     ML.Read_data = null;
-                    ML.stream = client.GetStream();
+                    ML.stream = ML.client.GetStream();
 
                     Console.Clear();
                     foreach (var chat in Server_list)
@@ -59,13 +60,19 @@ namespace Chapter02_Server
                     }
  
 
-                    ConsoleKeyInfo WirteKey = Console.ReadKey(true);
 
-                    if (WirteKey.Key == ConsoleKey.T)
+                    if (Console.ReadKey().Key == ConsoleKey.T)
                     {
                         Console.WriteLine("메세지를 입력해주세요.");
-
                         String Send_message = Console.ReadLine();
+                        if (Send_message == "/q")
+                        {
+                            ML.stream.Close();
+                            ML.client.Close();
+                            Console.WriteLine("프로그램이 종료 됩니다.");
+                            Func();
+                        }
+
                         Byte[] send_data = System.Text.Encoding.Default.GetBytes(Send_message);
                         ML.stream.Write(send_data, 0, send_data.Length);
                         Console.WriteLine($"주[] {Send_message}");
@@ -89,6 +96,11 @@ namespace Chapter02_Server
             {
                 Console.WriteLine("SocketException: {0}", e);
             }
+        }
+
+        static void Func()
+        {
+            Environment.Exit(0);
         }
 
         public static void Main()
