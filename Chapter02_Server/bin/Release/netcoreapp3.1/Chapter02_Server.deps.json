@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.1",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "Chapter02_Server/1.0.0": {
+        "dependencies": {
+          "ChatServer_Mutex": "1.0.0"
+        },
+        "runtime": {
+          "Chapter02_Server.dll": {}
+        }
+      },
+      "ChatServer_Mutex/1.0.0": {
+        "runtime": {
+          "ChatServer_Mutex.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Chapter02_Server/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "ChatServer_Mutex/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,3 @@
+is_global = true
+build_property.RootNamespace = Chapter02_Server
+build_property.ProjectDir = D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\

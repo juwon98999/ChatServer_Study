@@ -1,0 +1,14 @@
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\bin\Debug\netcoreapp3.1\ChatServer_Mutex.exe
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\bin\Debug\netcoreapp3.1\ChatServer_Mutex.deps.json
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\bin\Debug\netcoreapp3.1\ChatServer_Mutex.runtimeconfig.json
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\bin\Debug\netcoreapp3.1\ChatServer_Mutex.runtimeconfig.dev.json
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\bin\Debug\netcoreapp3.1\ChatServer_Mutex.dll
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\bin\Debug\netcoreapp3.1\ChatServer_Mutex.pdb
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\obj\Debug\netcoreapp3.1\ChatServer_Mutex.csproj.AssemblyReference.cache
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\obj\Debug\netcoreapp3.1\ChatServer_Mutex.GeneratedMSBuildEditorConfig.editorconfig
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\obj\Debug\netcoreapp3.1\ChatServer_Mutex.AssemblyInfoInputs.cache
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\obj\Debug\netcoreapp3.1\ChatServer_Mutex.AssemblyInfo.cs
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\obj\Debug\netcoreapp3.1\ChatServer_Mutex.csproj.CoreCompileInputs.cache
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\obj\Debug\netcoreapp3.1\ChatServer_Mutex.dll
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\obj\Debug\netcoreapp3.1\ChatServer_Mutex.pdb
+D:\C#\ChatServer_Mutex\ChatServer_Mutex\ChatServer_Mutex\obj\Debug\netcoreapp3.1\ChatServer_Mutex.genruntimeconfig.cache
