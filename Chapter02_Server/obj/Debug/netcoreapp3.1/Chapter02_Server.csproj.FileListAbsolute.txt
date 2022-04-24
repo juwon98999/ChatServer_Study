@@ -12,10 +12,3 @@ D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\obj\Debug\netcoreapp3.1
 D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\obj\Debug\netcoreapp3.1\Chapter02_Server.dll
 D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\obj\Debug\netcoreapp3.1\Chapter02_Server.pdb
 D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\obj\Debug\netcoreapp3.1\Chapter02_Server.genruntimeconfig.cache
-D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\bin\Debug\netcoreapp3.1\ChatServer_Mutex.deps.json
-D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\bin\Debug\netcoreapp3.1\ChatServer_Mutex.runtimeconfig.json
-D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\bin\Debug\netcoreapp3.1\ChatServer_Mutex.runtimeconfig.dev.json
-D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\bin\Debug\netcoreapp3.1\ChatServer_Mutex.exe
-D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\bin\Debug\netcoreapp3.1\ChatServer_Mutex.dll
-D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\bin\Debug\netcoreapp3.1\ChatServer_Mutex.pdb
-D:\C#\ChatServer_Mutex\ChatServer_Mutex\Chapter02_Server\obj\Debug\netcoreapp3.1\Chapter02_Server.csproj.CopyComplete
