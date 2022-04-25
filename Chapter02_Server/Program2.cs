@@ -19,6 +19,7 @@ namespace Chapter02_Server
             bool Server_Write = false;
             bool Trigger = false;
             bool Client_Writing = false;
+            bool test = false;
 
             String Send_message;
             String Read_data = null;
@@ -58,62 +59,69 @@ namespace Chapter02_Server
 
                 while (true)
                 {
-
+                   
                     Console.Clear();
                     foreach (var chat in Server_list)
                     {
                         Console.WriteLine(chat);
                     }
 
-                              (new Thread(new ThreadStart(() =>
-                              {
+                    if (test == false)
+                    {
+                        (new Thread(new ThreadStart(() =>
+                        {
 
-                                  while (Trigger)
-                                  {
+                            while (Trigger)
+                            {
 
-                                      if (ClientConnect)
-                                      {
-                                          bytes = new Byte[512];
-                                          Read_data = null;
-                                          Int32 byt = Server_stream.Read(bytes, 0, bytes.Length);
-                                          Read_data = System.Text.Encoding.Default.GetString(bytes, 0, byt);
-                                          Console.WriteLine();
+                                if (ClientConnect)
+                                {
+                                    //Server_mut.WaitOne();
+                                    bytes = new Byte[512];
+                                    Read_data = null;
+                                    Int32 byt = Server_stream.Read(bytes, 0, bytes.Length);
+                                    Read_data = System.Text.Encoding.Default.GetString(bytes, 0, byt);
+                                    //Server_mut.ReleaseMutex();
 
-                                          Server_mut.WaitOne();
-                                          if (Server_list.Count < 10)
-                                          {
-                                              Server_list.AddLast($"수[] {Read_data}");
+                                    if (Server_list.Count < 10)
+                                    {
+                                        Server_list.AddLast($"수[] {Read_data}");
 
-                                              Console.Clear();
-                                              foreach (var chat in Server_list)
-                                              {
-                                                  Console.WriteLine(chat);
-                                              }
-                                              Trigger = false;
-                                              Client_Writing = true;
-                                          }
-                                          else if (Server_list.Count >= 10)
-                                          {
-                                              LinkedListNode<string> node = Server_list.Find("'주' 님께서 연결되었습니다.");
-                                              Server_list.AddAfter(node, $"수[] {Read_data}");
-                                              Server_list.RemoveLast();
+                                        Console.Clear();
+                                        foreach (var chat in Server_list)
+                                        {
+                                            Console.WriteLine(chat);
+                                        }
+                                        Trigger = false;
+                                        Client_Writing = true;
 
-                                              Console.Clear();
-                                              foreach (var chat in Server_list)
-                                              {
-                                                  Console.WriteLine(chat);
-                                              }
-                                              Trigger = false;
-                                              Client_Writing = true;
-                                              ;
-                                          }
-                                          Server_mut.ReleaseMutex();
-                                      }
-                                  }
+                                    }
+                                    else if (Server_list.Count >= 10)
+                                    {
+                                        LinkedListNode<string> node = Server_list.Find("'주' 님께서 연결되었습니다.");
+                                        Server_list.AddAfter(node, $"수[] {Read_data}");
+                                        Server_list.RemoveLast();
 
-                              }))).Start();
+                                        Console.Clear();
+                                        foreach (var chat in Server_list)
+                                        {
+                                            Console.WriteLine(chat);
+                                        }
+                                        Trigger = false;
+                                        Client_Writing = true;
+                                    }
 
-                    if (Client_Writing)
+                                }
+                                test = true;
+                            }
+
+                        }))).Start();
+                 }
+
+
+
+
+                if (Client_Writing)
                     {
                         Console.SetCursorPosition(0, 12);
                         Console.WriteLine("수> 대화를 입력중입니다.");
@@ -124,53 +132,54 @@ namespace Chapter02_Server
                     Server_Write = true;
                     Trigger = true;
 
-                    if (Server_Write)
-                    {
-                        if (Console.ReadKey().Key == ConsoleKey.D1)
+                        Server_mut.WaitOne();
+                        if (Server_Write)
                         {
-                            Console.SetCursorPosition(0, 15);
-                            Console.WriteLine("메세지를 입력해주세요.");
-
-                            Send_message = Console.ReadLine();
-
-                            if (Send_message == "/q")
+                            if (Console.ReadKey().Key == ConsoleKey.D1)
                             {
-                                Server_stream.Close();
-                                client.Close();
-                                Console.WriteLine("프로그램이 종료 됩니다.");
-                                Func();
-                            }
-                            bytes = new Byte[512];
-                            bytes = System.Text.Encoding.Default.GetBytes(Send_message);
-                            Server_stream.Write(bytes, 0, bytes.Length);
+                         
+                                Console.SetCursorPosition(0, 15);
+                                Console.WriteLine("메세지를 입력해주세요.");
+                                test = false;
+                                Send_message = Console.ReadLine();
 
-                            if (Server_list.Count < 10)
-                            {
-                                Server_list.AddLast($"주[] {Send_message}");
-
-                                Console.Clear();
-                                foreach (var chat in Server_list)
+                                if (Send_message == "/q")
                                 {
-                                    Console.WriteLine(chat);
+                                    Server_stream.Close();
+                                    client.Close();
+                                    Console.WriteLine("프로그램이 종료 됩니다.");
+                                    Func();
                                 }
-                                Trigger = true;
-                            }
-                            else if (Server_list.Count >= 10)
-                            {
-                                LinkedListNode<string> node = Server_list.Find("'주' 님께서 연결되었습니다.");
-                                Server_list.AddAfter(node, $"주[] {Send_message}");
-                                Server_list.RemoveLast();
+                                bytes = new Byte[512];
+                                bytes = System.Text.Encoding.Default.GetBytes(Send_message);
+                                Server_stream.Write(bytes, 0, bytes.Length);
 
-                                Console.Clear();
-                                foreach (var chat in Server_list)
+                                if (Server_list.Count < 10)
                                 {
-                                    Console.WriteLine(chat);
+                                    Server_list.AddLast($"주[] {Send_message}");
+
+                                    Console.Clear();
+                                    foreach (var chat in Server_list)
+                                    {
+                                        Console.WriteLine(chat);
+                                    }
+                                    Trigger = true;
                                 }
-                                Trigger = true;
-                            }  
+                                else if (Server_list.Count >= 10)
+                                {
+                                    LinkedListNode<string> node = Server_list.Find("'주' 님께서 연결되었습니다.");
+                                    Server_list.AddAfter(node, $"주[] {Send_message}");
+                                    Server_list.RemoveLast();
+
+                                    Console.Clear();
+                                    foreach (var chat in Server_list)
+                                    {
+                                        Console.WriteLine(chat);
+                                    }
+                                    Trigger = true;
+                                }  
+                            }
                         }
-                    }
-
                 }
             }
             catch (SocketException e)

@@ -32,6 +32,7 @@ namespace ChatServer_Mutex
             String Read_Message = null;
             bool Client_Write = false;
             bool Server_Writing = false;
+            bool test = false;
 
 
             while (Mc.ConnectTry)
@@ -71,18 +72,78 @@ namespace ChatServer_Mutex
                         Console.WriteLine(chat);
                     }
 
+                    if (Server_Writing)
+                    {
+                        Console.SetCursorPosition(0, 12);
+                        Console.WriteLine("주> 대화를 입력중입니다.");
+                    }
+
+                    Client_Write = true;
+
+
+                        if (Client_Write)
+                        {
+                            if (Console.ReadKey().Key == ConsoleKey.D1)
+                            {
+                                Console.SetCursorPosition(0, 15);
+                                Console.WriteLine("메세지를 입력해주세요.");
+
+                            test = true;
+                                message = Console.ReadLine();
+                                if (message == "/q")
+                                {
+                                    Client_stream.Close();
+                                    client.Close();
+                                    Console.WriteLine("프로그램이 종료 됩니다.");
+                                    Func();
+                                }
+                                data = new Byte[512];
+                                data = System.Text.Encoding.Default.GetBytes(message);
+                                Client_stream.Write(data, 0, data.Length);
+
+                                if (Client_list.Count < 10)
+                                {
+                                    Client_list.AddLast($"수[] {message}");
+
+                                    Console.Clear();
+                                    foreach (var chat in Client_list)
+                                    {
+                                        Console.WriteLine(chat);
+                                    }
+                                    Trigger = true;
+                                }
+                                else if (Client_list.Count >= 10)
+                                {
+                                    LinkedListNode<string> node = Client_list.Find("'수'님이 접속하셨습니다.");
+                                    Client_list.AddAfter(node, $"수[] {message}");
+                                    Client_list.RemoveLast();
+
+                                    Console.Clear();
+                                    foreach (var chat in Client_list)
+                                    {
+                                        Console.WriteLine(chat);
+                                    }
+                                    Trigger = true;
+                                }
+                            }
+                        }
+
+                    if (test)
+                    {
                         (new Thread(new ThreadStart(() =>
                         {
+
                             while (Trigger)
                             {
-                                //Client_mut.WaitOne();
+                               
                                 if (Mc.isConnect)
                                 {
+                                    Client_mut.WaitOne();
                                     data = new Byte[512];
                                     Read_Message = null;
                                     Int32 bytes = Client_stream.Read(data, 0, data.Length);
                                     Read_Message = System.Text.Encoding.Default.GetString(data, 0, bytes);
-
+                                    Client_mut.ReleaseMutex();
 
                                     if (Client_list.Count < 10)
                                     {
@@ -95,6 +156,7 @@ namespace ChatServer_Mutex
                                         }
                                         Trigger = false;
                                         Server_Writing = true;
+
                                     }
                                     else if (Client_list.Count >= 10)
                                     {
@@ -112,71 +174,17 @@ namespace ChatServer_Mutex
                                     }
 
                                 }
-                                //Client_mut.ReleaseMutex();
+                                Server_Writing = false;
+                                test = false;
                             }
-
                         }))).Start();
-
-                    if (Server_Writing)
-                    {
-                        Console.SetCursorPosition(0, 12);
-                        Console.WriteLine("주> 대화를 입력중입니다.");
-                        Server_Writing = false;
                     }
 
-                    Client_Write = true;
-
-                    //(new Thread(new ThreadStart(() =>
-                    //{
-                    if (Client_Write)
+                    Console.Clear();
+                    foreach (var chat in Client_list)
                     {
-                        if (Console.ReadKey().Key == ConsoleKey.D1)
-                        {
-                            Console.SetCursorPosition(0, 15);
-                            Console.WriteLine("메세지를 입력해주세요.");
-
-                      
-                            message = Console.ReadLine();
-
-                            if (message == "/q")
-                            {
-                                Client_stream.Close();
-                                client.Close();
-                                Console.WriteLine("프로그램이 종료 됩니다.");
-                                Func();
-                            }
-                            data = new Byte[512];
-                            data = System.Text.Encoding.Default.GetBytes(message);
-                            Client_stream.Write(data, 0, data.Length);
-
-                            if (Client_list.Count < 10)
-                            {
-                                Client_list.AddLast($"수[] {message}");
-
-                                Console.Clear();
-                                foreach (var chat in Client_list)
-                                {
-                                    Console.WriteLine(chat);
-                                }
-                                Trigger = true;
-                            }
-                            else if (Client_list.Count >= 10)
-                            {
-                                LinkedListNode<string> node = Client_list.Find("'수'님이 접속하셨습니다.");
-                                Client_list.AddAfter(node, $"수[] {message}");
-                                Client_list.RemoveLast();
-
-                                Console.Clear();
-                                foreach (var chat in Client_list)
-                                {
-                                    Console.WriteLine(chat);
-                                }
-                                Trigger = true;
-                            }
-                        }
+                        Console.WriteLine(chat);
                     }
-
-                    //}))).Start();
 
                 }
             }
