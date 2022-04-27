@@ -38,8 +38,8 @@ namespace ChatServer_Mutex
             while (Mc.ConnectTry)
             {
                 String IpInput = Console.ReadLine();
-                //if(IpInput == $"/c {server}:{port}")
-                if (IpInput == $"/c")
+                if(IpInput == $"/c {server}:{port}")
+                //if (IpInput == $"/c")
                 {
                     Client_list.AddLast($"{server}:{port}에 접속 시도중...");
                     Client_list.AddLast("'수'님이 접속하셨습니다.");
